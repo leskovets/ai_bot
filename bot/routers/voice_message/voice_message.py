@@ -1,13 +1,17 @@
 import os
+import logging
 from datetime import datetime
 
-import whisper
 from aiogram import Router, F
 from aiogram.filters import Command
-from aiogram.types import Message
+from aiogram.types import Message, FSInputFile
 
+from ai.openAI_TTS import text_in_voice
+from ai.openAI_assistant import get_answer_from_open_ai
+from ai.whisper import voice_to_text
 
 router = Router()
+logger = logging.getLogger('voice.message')
 
 
 @router.message(Command('start'))
@@ -24,10 +28,16 @@ async def voice_message_handler(message: Message):
     file_name = f"{message.chat.id}_{datetime.now()}.mp3"
     await message.bot.download_file(file_path, file_name)
 
-    model = whisper.load_model("base")
-    result = model.transcribe(file_name)
-    text = result["text"]
+    text = voice_to_text(file_name)
+    logger.info(f" converting from sound to text: {text}")
+
+    answer = get_answer_from_open_ai(text)
+    logger.info(f" response from the assistant: {answer}")
+
+    text_in_voice(answer, file_name)
+    logger.info(f" convert text to sound")
+
+    image_from_pc = FSInputFile(file_name)
+    await message.reply_voice(image_from_pc)
 
     os.remove(file_name)
-
-    await message.answer(text)

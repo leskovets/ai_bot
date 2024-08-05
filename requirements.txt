@@ -16,3 +16,4 @@ python-dotenv==1.0.1
 typing_extensions==4.11.0
 yarl==1.9.4
 openai-whisper==20231117
+openai==1.39.0
