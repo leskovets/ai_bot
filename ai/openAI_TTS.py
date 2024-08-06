@@ -5,7 +5,7 @@ from openai import OpenAI
 
 def text_in_voice(text: str, file_name: str) -> None:
 
-    client = OpenAI(api_key=os.getenv('API_TOKEN_OpenAI'))
+    client = OpenAI(api_key=os.getenv('API_TOKEN_OPENAI'))
 
     response = client.audio.speech.create(
         model="tts-1",

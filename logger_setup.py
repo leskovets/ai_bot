@@ -9,13 +9,12 @@ dict_config = {
             'format': "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
         }
     },
-
     'handlers': {
         'console': {
             'class': logging.StreamHandler,
             'level': "DEBUG",
             'formatter': 'base'
-        }
+        },
     },
     'loggers': {
         'voice.message': {

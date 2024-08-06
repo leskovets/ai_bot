@@ -34,7 +34,7 @@ def wait_on_run(run, thread, client):
 
 def get_answer_from_open_ai(question: str) -> str:
 
-    client = OpenAI(api_key=os.getenv('API_TOKEN_OpenAI'))
+    client = OpenAI(api_key=os.getenv('API_TOKEN_OPENAI'))
 
     assistant = client.beta.assistants.create(
         name="My AI",

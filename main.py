@@ -14,6 +14,8 @@ from logger_setup import dict_config
 async def main() -> None:
     logging.config.dictConfig(dict_config)
 
+    logger = logging.getLogger('main')
+
     load_dotenv('.env')
 
     token = os.getenv('API_TOKEN_telegram')
@@ -31,7 +33,7 @@ async def main() -> None:
     try:
         await dp.start_polling(bot)
     except Exception as ex:
-        print(ex)
+        logger.error(ex)
 
 
 if __name__ == '__main__':
