@@ -27,6 +27,7 @@ async def voice_message_handler(message: Message):
     file_path = file.file_path
     file_name = f"{message.chat.id}_{datetime.now()}.mp3"
     await message.bot.download_file(file_path, file_name)
+    logger.info(f" download_audio complete, filename: {file_name}")
 
     text = voice_to_text(file_name)
     logger.info(f" converting from sound to text: {text}")
@@ -40,4 +41,5 @@ async def voice_message_handler(message: Message):
     image_from_pc = FSInputFile(file_name)
     await message.reply_voice(image_from_pc)
 
+    logger.info(f" send voice to user")
     os.remove(file_name)
