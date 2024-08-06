@@ -1,16 +1,18 @@
 import asyncio
-import logging.config
+import logging
 import os
+from logging.config import dictConfig
 
 from aiogram import Dispatcher, Bot
 from dotenv import load_dotenv
 from aiogram.types import BotCommand
 
 from bot.routers import router as main_router
+from logger_setup import dict_config
 
 
 async def main() -> None:
-    logging.basicConfig(level=logging.INFO)
+    logging.config.dictConfig(dict_config)
 
     load_dotenv('.env')
 

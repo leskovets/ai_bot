@@ -25,6 +25,10 @@ dict_config = {
         'aiogram.event': {
             'level': 'DEBUG',
             'handlers': ['console', ]
-        }
+        },
+        'aiogram.dispatcher':  {
+            'level': 'DEBUG',
+            'handlers': ['console', ]
+        },
     }
 }
