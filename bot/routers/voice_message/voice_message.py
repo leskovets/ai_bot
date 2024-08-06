@@ -26,10 +26,11 @@ async def voice_message_handler(message: Message):
     file = await message.bot.get_file(file_id)
     file_path = file.file_path
     file_name = f"{message.chat.id}_{datetime.now()}.mp3"
-    await message.bot.download_file(file_path, file_name)
-    logger.info(f" download_audio complete, filename: {file_name}")
 
-    text = voice_to_text(file_name)
+    await message.bot.download_file(file_path, file_name)
+    logger.info(f" download_audio complete, filename: '{file_name}'")
+
+    text = voice_to_text('ffmpe')
     logger.info(f" converting from sound to text: {text}")
 
     answer = get_answer_from_open_ai(text)
