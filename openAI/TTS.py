@@ -9,7 +9,7 @@ async def text_in_voice(text: str, path: str) -> None:
 
     response = await client.audio.speech.create(
         model="tts-1",
-        voice="alloy",
+        voice="nova",
         input=text,
     )
 
