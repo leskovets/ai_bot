@@ -12,19 +12,17 @@ from logger_setup import dict_config
 
 
 async def main() -> None:
-    logging.config.dictConfig(dict_config)
+
+    logging.basicConfig(level=logging.INFO)
 
     logger = logging.getLogger('main')
-
+    logger.debug('Start main')
     load_dotenv('.env')
 
     token = os.getenv('API_TOKEN_telegram')
     bot = Bot(token)
     await bot.set_my_commands([
-        BotCommand(command='help', description='Помощь'),
-        BotCommand(command='reminder', description='Напоминания'),
-        BotCommand(command='history', description='История молитв'),
-
+        BotCommand(command='start', description='старт'),
     ])
     dp = Dispatcher()
 
