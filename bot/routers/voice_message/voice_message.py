@@ -44,3 +44,12 @@ async def voice_message_handler(message: Message):
 
     logger.info(f"send voice to user")
     os.remove(file_name)
+
+
+@router.message(F.text)
+async def text_message_handler(message: Message):
+
+    answer = await get_answer_from_assistant(message.text)
+    logger.info(f"response from the assistant: {answer}")
+
+    await message.reply(text=answer)
