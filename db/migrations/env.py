@@ -20,7 +20,7 @@ from db.database import Base, Treads # noqa
 # )
 
 
-db_url = 'postgresql://postgres:@postgres.railway.internal:5432/railway'
+db_url = 'postgresql+asyncpg://postgres:@postgres.railway.internal:5432/railway'
 
 config = context.config
 
