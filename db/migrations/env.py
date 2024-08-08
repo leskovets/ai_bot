@@ -25,7 +25,7 @@ db_url = "postgresql+asyncpg://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}
     DB_PASS='JZOEtYSauBmuAzJjZiJQdvyDbZfdStxO',
     DB_HOST='postgres-yshe.railway.internal',
     DB_PORT='5432',
-    DB_NAME='railway',
+    DB_NAME='Postgres-ysHE',
 )
 
 config = context.config
