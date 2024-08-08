@@ -10,9 +10,8 @@ WORKDIR /app
 
 RUN python -m pip install -r requirements.txt
 
+COPY . /app/
 
 RUN alembic upgrade head
-
-COPY . /app/
 
 ENTRYPOINT ["python", "main.py"]
