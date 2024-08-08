@@ -22,6 +22,7 @@ async def main() -> None:
     bot = Bot(token)
     await bot.set_my_commands([
         BotCommand(command='start', description='старт'),
+        BotCommand(command='new_tread', description='сбросить историю сообщений'),
     ])
     dp = Dispatcher()
 

@@ -4,11 +4,13 @@ from aiogram import Router
 
 from .start import router as start_router
 from .test import router as test_router
+from .new_tread import router as new_tread_router
 
 router = Router()
 
 router.include_routers(
     start_router,
     test_router,
+    new_tread_router,
 
 )

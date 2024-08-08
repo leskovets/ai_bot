@@ -9,5 +9,5 @@ class Treads(Base):
     __tablename__ = 'treads'
 
     chat_id: Mapped[int] = mapped_column(primary_key=True, autoincrement=False)
-    tread_id: Mapped[int | None]
+    tread_id: Mapped[str | None]
     key_value: Mapped[str | None]

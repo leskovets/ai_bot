@@ -8,4 +8,3 @@ router = Router()
 async def start(message: Message) -> None:
     text = f'Привет. Ты можешь задать мне вопрос головым сообщением и я отвечу тебе.'
     await message.answer(text)
-
