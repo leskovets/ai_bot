@@ -3,6 +3,7 @@ FROM python:3.12.1
 RUN apt-get -y update
 RUN apt-get -y upgrade
 RUN apt-get install -y ffmpeg
+RUN alembic upgrade head
 
 COPY requirements.txt ./app/
 
