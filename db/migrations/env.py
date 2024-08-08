@@ -9,18 +9,15 @@ from alembic import context
 
 from db.database import Base, Treads # noqa
 
-# load_dotenv('.env')
-#
-# db_url = "postgresql+asyncpg://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}".format(
-#     DB_USER=os.getenv('DB_USER'),
-#     DB_PASS=os.getenv('DB_PASS'),
-#     DB_HOST=os.getenv('DB_HOST'),
-#     DB_PORT=os.getenv('DB_PORT'),
-#     DB_NAME=os.getenv('DB_NAME'),
-# )
+load_dotenv('.env')
 
-
-db_url = 'postgresql+asyncpg://postgres:JZOEtYSauBmuAzJjZiJQdvyDbZfdStxO@postgres-yshe.railway.internal:5432/Postgres-ysHE'
+db_url = "postgresql+asyncpg://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}".format(
+    DB_USER=os.getenv('DB_USER'),
+    DB_PASS=os.getenv('DB_PASS'),
+    DB_HOST=os.getenv('DB_HOST'),
+    DB_PORT=os.getenv('DB_PORT'),
+    DB_NAME=os.getenv('DB_NAME'),
+)
 
 config = context.config
 

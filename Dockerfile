@@ -12,6 +12,4 @@ RUN python -m pip install -r requirements.txt
 
 COPY . /app/
 
-RUN alembic upgrade head
-
 ENTRYPOINT ["python", "main.py"]
