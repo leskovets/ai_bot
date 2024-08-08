@@ -1,4 +1,5 @@
-from database import session_factory, Treads
+from database import Treads
+from db.config_db import session_factory
 
 
 def add_tread_from_chat_id(chat_id: int, tread_id: int) -> None:
