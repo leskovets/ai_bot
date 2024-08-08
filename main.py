@@ -1,14 +1,12 @@
 import asyncio
 import logging
 import os
-from logging.config import dictConfig
 
 from aiogram import Dispatcher, Bot
 from dotenv import load_dotenv
 from aiogram.types import BotCommand
 
 from bot.routers import router as main_router
-from logger_setup import dict_config
 
 
 async def main() -> None:
@@ -17,6 +15,7 @@ async def main() -> None:
 
     logger = logging.getLogger('main')
     logger.debug('Start main')
+
     load_dotenv('.env')
 
     token = os.getenv('API_TOKEN_telegram')
