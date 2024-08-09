@@ -1,8 +1,11 @@
 import os
+import json
 
 from openai import AsyncOpenAI
-from openAI.openai_tools import tools
-from db.db_handler import add_tread_from_chat_id, get_tread_id_or_none
+
+from openAI.completions import validate_key_value
+from openAI.openai_tools import assistant_tools
+from db.db_handler import add_tread_from_chat_id, get_tread_id_or_none, update_key_value_by_chat_id
 
 
 async def get_answer_from_assistant(question: str, chat_id: int) -> str:
@@ -10,12 +13,12 @@ async def get_answer_from_assistant(question: str, chat_id: int) -> str:
 
     assistant = await client.beta.assistants.create(
         name="assistant",
-        instructions="your main task is to find out my hobbies, "
-                     "find out my hobbies from the message history,"
-                     "don't ask me questions about my hobbies, "
-                     "use the save_value function to save my hobby",
+        instructions="your main task in communicating with me is to find out my key values, "
+                     "then they will need to be saved using your save_value function. "
+                     "if the answer is True, then the data is saved, "
+                     "if False, then this value does not fit, you need to look further",
         model="gpt-4o",
-        tools=tools
+        tools=assistant_tools
 
     )
     tread_id = await get_tread_id_or_none(chat_id)
@@ -40,16 +43,17 @@ async def get_answer_from_assistant(question: str, chat_id: int) -> str:
 
         for tool in run.required_action.submit_tool_outputs.tool_calls:
             if tool.function.name == "save_value":
+                arguments = json.loads(tool.function.arguments)
+                key_value = arguments.get('key_value')
+
+                res = await validate_key_value(key_value)
+
+                if res == 'True':
+                    await update_key_value_by_chat_id(chat_id, key_value)
                 tool_outputs.append({
                     "tool_call_id": tool.id,
-                    "output": 'seve'
+                    "output": res
                 })
-            elif tool.function.name == "get_rain_probability":
-                tool_outputs.append({
-                    "tool_call_id": tool.id,
-                    "output": "0.06"
-                })
-            print(tool.function)
 
         if tool_outputs:
             try:

@@ -26,3 +26,10 @@ async def del_user(chat_id: int) -> None:
     if user is not None:
         await session.delete(user)
         await session.commit()
+
+
+async def update_key_value_by_chat_id(chat_id: int, key_value: str) -> None:
+    async with session_factory() as session:
+        user = await session.get(Treads, chat_id)
+        user.key_value = key_value
+        await session.commit()

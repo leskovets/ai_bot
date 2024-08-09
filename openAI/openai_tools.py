@@ -1,34 +1,44 @@
-tools = [{
+assistant_tools = [{
             "type": "function",
             "function": {
                 "name": "save_value",
-                "description": "before replying to each message, analyze the story, find my hobby",
+                "description": "when you find out my key values, this function will save them to the database",
                 "parameters": {
                     "type": "object",
                     "properties": {
-                        "location": {
+                        "key_value": {
                             "type": "string",
-                            "description": "choose one hobby and write to me in one word"
+                            "description": "choose one key value and write it briefly in one or two words"
                         },
                     },
-                    "required": ["location", ]
+                    "required": ["key_value", ]
                 }
             }
         },
-        {
-            "type": "function",
-            "function": {
-                "name": "get_rain_probability",
-                "description": "Get the probability of rain for a specific location",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "location": {
-                            "type": "string",
-                            "description": "The city and state, e.g., San Francisco, CA"
-                        }
+        ]
+
+
+completions_tool = [
+    {
+        "type": "function",
+        "function": {
+            "name": "validator",
+            "description":  "check if it can be of value to a person:"
+                            "the response was received in the True or False format",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "is_valid": {
+                        "type": "string",
+                        "enum": ["True", "False"],
+                        "description": "choose the appropriate option",
                     },
-                    "required": ["location"]
-                }
-            }
-        }]
+                },
+                "required": ["is_valid"],
+                "additionalProperties": False,
+            },
+        }
+    }
+]
+
+
