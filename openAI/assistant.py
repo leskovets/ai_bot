@@ -1,4 +1,3 @@
-import os
 import json
 
 from openai import AsyncOpenAI
@@ -6,10 +5,11 @@ from openai import AsyncOpenAI
 from openAI.completions import validate_key_value
 from openAI.openai_tools import assistant_tools
 from db.db_handler import add_tread_from_chat_id, get_tread_id_or_none, update_key_value_by_chat_id
+from config import settings
 
 
 async def get_answer_from_assistant(question: str, chat_id: int) -> str:
-    client = AsyncOpenAI(api_key=os.getenv('API_TOKEN_OPENAI'))
+    client = AsyncOpenAI(api_key=settings.API_TOKEN_OPENAI)
 
     assistant = await client.beta.assistants.create(
         name="assistant",

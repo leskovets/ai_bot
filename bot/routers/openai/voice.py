@@ -10,11 +10,11 @@ from openAI.assistant import get_answer_from_assistant
 from openAI.whisper import voice_to_text
 
 router = Router()
-logger = logging.getLogger('voice.message')
+logger = logging.getLogger('voice_router')
 
 
 @router.message(F.voice)
-async def voice_message_handler(message: Message):
+async def voice_handler(message: Message):
     file_id = message.voice.file_id
     file = await message.bot.get_file(file_id)
     file_path = file.file_path
@@ -37,12 +37,3 @@ async def voice_message_handler(message: Message):
 
     logger.debug(f"send voice to user")
     os.remove(file_name)
-
-
-@router.message(F.text)
-async def text_message_handler(message: Message):
-
-    answer = await get_answer_from_assistant(message.text, message.chat.id)
-    logger.debug(f"response from the assistant: {answer}")
-
-    await message.reply(text=answer)

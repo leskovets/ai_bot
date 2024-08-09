@@ -3,9 +3,10 @@ import os
 
 from openai import AsyncOpenAI
 
+from config import settings
 from openAI.openai_tools import completions_tool
 
-client = AsyncOpenAI(api_key=os.getenv('API_TOKEN_OPENAI'))
+client = AsyncOpenAI(api_key=settings.API_TOKEN_OPENAI)
 
 
 async def validate_key_value(key_value: str) -> str:

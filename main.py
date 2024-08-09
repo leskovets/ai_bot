@@ -1,11 +1,10 @@
 import asyncio
 import logging
-import os
 
 from aiogram import Dispatcher, Bot
-from dotenv import load_dotenv
 from aiogram.types import BotCommand
 
+from config import settings
 from bot.routers import router as main_router
 
 
@@ -16,10 +15,7 @@ async def main() -> None:
     logger = logging.getLogger('main')
     logger.debug('Start main')
 
-    load_dotenv('.env')
-
-    token = os.getenv('API_TOKEN_telegram')
-    bot = Bot(token)
+    bot = Bot(settings.API_TOKEN_telegram)
     await bot.set_my_commands([
         BotCommand(command='start', description='старт'),
         BotCommand(command='new_tread', description='сбросить историю сообщений'),
