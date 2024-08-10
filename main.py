@@ -3,12 +3,15 @@ import logging
 
 from aiogram import Dispatcher, Bot
 from aiogram.types import BotCommand
+from amplitude import Amplitude
 
 from config import settings
 from bot.routers import router as main_router
 
 
 async def main() -> None:
+
+    amplitude_client = Amplitude(settings.AMPLITUDE_API_KEY)
 
     logging.basicConfig(level=logging.INFO)
 

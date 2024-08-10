@@ -1,3 +1,6 @@
+from concurrent.futures import ThreadPoolExecutor
+
+from amplitude import Amplitude
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -9,9 +12,9 @@ class Settings(BaseSettings):
     DB_NAME: str
     API_TOKEN_OPENAI: str
     API_TOKEN_telegram: str
-
+    AMPLITUDE_API_KEY: str
     DB_ECHO: bool = False
-    
+
     @property
     def postgres_url(self):
         # postgresql+asyncpg://postgres:postgres@localhost:5432/sa
@@ -21,3 +24,7 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
+
+executor = ThreadPoolExecutor(max_workers=1)
+
+am_client = Amplitude(settings.AMPLITUDE_API_KEY)
