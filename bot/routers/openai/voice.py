@@ -4,7 +4,9 @@ from datetime import datetime
 
 from aiogram import Router, F
 from aiogram.types import Message, FSInputFile
+from amplitude import BaseEvent
 
+from config import executor, am_client
 from openAI.TTS import text_in_voice
 from openAI.assistant import get_answer_from_assistant
 from openAI.whisper import voice_to_text
@@ -15,6 +17,8 @@ logger = logging.getLogger('voice_router')
 
 @router.message(F.voice)
 async def voice_handler(message: Message):
+    executor.submit(am_client.track(BaseEvent(
+        event_type='User uploaded a voice', user_id=str(message.chat.id))))
     file_id = message.voice.file_id
     file = await message.bot.get_file(file_id)
     file_path = file.file_path
