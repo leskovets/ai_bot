@@ -25,6 +25,6 @@ class Settings(BaseSettings):
 
 settings = Settings()
 
-executor = ThreadPoolExecutor(max_workers=1)
+executor = ThreadPoolExecutor()
 
 am_client = Amplitude(settings.AMPLITUDE_API_KEY)
