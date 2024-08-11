@@ -1,4 +1,4 @@
-from db.database import Treads, session_factory
+from postgres_db.database import Treads, session_factory
 
 
 async def add_tread_from_chat_id(chat_id: int, tread_id: str) -> None:

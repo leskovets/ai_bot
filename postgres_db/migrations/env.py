@@ -7,7 +7,7 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from db.database import Base, Treads # noqa
+from postgres_db.database import Base, Treads # noqa
 
 load_dotenv('.env')
 

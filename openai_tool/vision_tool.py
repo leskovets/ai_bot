@@ -1,8 +1,6 @@
 import base64
 
-from openai import AsyncOpenAI
-
-from config import settings
+from config import client
 
 
 def encode_image(path):
@@ -13,8 +11,6 @@ def encode_image(path):
 async def photo_to_emotions(path: str) -> str:
 
     base64_image = encode_image(path)
-
-    client = AsyncOpenAI(api_key=settings.API_TOKEN_OPENAI)
 
     response = await client.chat.completions.create(
         model="gpt-4o-mini",

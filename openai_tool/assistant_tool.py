@@ -1,15 +1,12 @@
 import json
 
-from openai import AsyncOpenAI
-
 from openai_tool.completions_tool import validate_key_value
 from openai_tool.openai_tools import assistant_tools
-from db.db_handler import add_tread_from_chat_id, get_tread_id_or_none, update_key_value_by_chat_id
-from config import settings
+from postgres_db.db_handler import update_key_value_by_chat_id
+from config import client
 
 
-async def get_answer_from_assistant(question: str, chat_id: int) -> str:
-    client = AsyncOpenAI(api_key=settings.API_TOKEN_OPENAI)
+async def get_answer_from_assistant(question: str, chat_id: int, tread_id: str) -> str:
 
     assistant = await client.beta.assistants.create(
         name="assistant",
@@ -21,11 +18,6 @@ async def get_answer_from_assistant(question: str, chat_id: int) -> str:
         tools=assistant_tools
 
     )
-    tread_id = await get_tread_id_or_none(chat_id)
-    if tread_id is None:
-        thread = await client.beta.threads.create()
-        tread_id = thread.id
-        await add_tread_from_chat_id(chat_id, tread_id)
 
     message = await client.beta.threads.messages.create(
         thread_id=tread_id,

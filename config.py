@@ -1,6 +1,7 @@
 from concurrent.futures import ThreadPoolExecutor
 
 from amplitude import Amplitude
+from openai import AsyncOpenAI
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -14,6 +15,7 @@ class Settings(BaseSettings):
     API_TOKEN_telegram: str
     AMPLITUDE_API_KEY: str
     DB_ECHO: bool = False
+    REDIS_URL: str
 
     @property
     def postgres_url(self):
@@ -27,3 +29,5 @@ settings = Settings()
 executor = ThreadPoolExecutor()
 
 am_client = Amplitude(settings.AMPLITUDE_API_KEY)
+
+client = AsyncOpenAI(api_key=settings.API_TOKEN_OPENAI)

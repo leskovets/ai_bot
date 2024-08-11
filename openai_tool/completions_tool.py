@@ -1,12 +1,7 @@
 import json
-import os
 
-from openai import AsyncOpenAI
-
-from config import settings
+from config import client
 from openai_tool.openai_tools import completions_tool
-
-client = AsyncOpenAI(api_key=settings.API_TOKEN_OPENAI)
 
 
 async def validate_key_value(key_value: str) -> str:

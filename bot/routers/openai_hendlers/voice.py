@@ -3,6 +3,7 @@ import logging
 from datetime import datetime
 
 from aiogram import Router, F
+from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, FSInputFile
 from amplitude import BaseEvent
 
@@ -16,7 +17,7 @@ logger = logging.getLogger('voice_router')
 
 
 @router.message(F.voice)
-async def voice_handler(message: Message):
+async def voice_handler(message: Message, state: FSMContext):
     executor.submit(am_client.track(BaseEvent(
         event_type='User uploaded a voice', user_id=str(message.chat.id))))
     file_id = message.voice.file_id
@@ -30,7 +31,8 @@ async def voice_handler(message: Message):
     text = await voice_to_text(file_name)
     logger.debug(f"converting from sound to text: {text}")
 
-    answer = await get_answer_from_assistant(text, message.chat.id)
+    tread_id = (await state.get_data())['tread_id']
+    answer = await get_answer_from_assistant(text, message.chat.id, tread_id)
     logger.debug(f"response from the assistant: {answer}")
 
     await text_in_voice(answer, file_name)
