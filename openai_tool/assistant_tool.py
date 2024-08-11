@@ -2,8 +2,8 @@ import json
 
 from openai import AsyncOpenAI
 
-from openai.completions import validate_key_value
-from openai.openai_tools import assistant_tools
+from openai_tool.completions_tool import validate_key_value
+from openai_tool.openai_tools import assistant_tools
 from db.db_handler import add_tread_from_chat_id, get_tread_id_or_none, update_key_value_by_chat_id
 from config import settings
 

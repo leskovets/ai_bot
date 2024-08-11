@@ -3,7 +3,7 @@ import logging
 from aiogram import Router, F
 from aiogram.types import Message
 
-from openai.assistant import get_answer_from_assistant
+from openai_tool.assistant_tool import get_answer_from_assistant
 
 router = Router()
 logger = logging.getLogger('text_router')

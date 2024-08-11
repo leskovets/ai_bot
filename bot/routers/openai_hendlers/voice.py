@@ -7,9 +7,9 @@ from aiogram.types import Message, FSInputFile
 from amplitude import BaseEvent
 
 from config import executor, am_client
-from openai.TTS import text_in_voice
-from openai.assistant import get_answer_from_assistant
-from openai.whisper import voice_to_text
+from openai_tool.TTS_tool import text_in_voice
+from openai_tool.assistant_tool import get_answer_from_assistant
+from openai_tool.whisper_tool import voice_to_text
 
 router = Router()
 logger = logging.getLogger('voice_router')

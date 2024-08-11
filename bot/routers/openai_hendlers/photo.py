@@ -6,7 +6,7 @@ from aiogram.types import Message
 from amplitude import BaseEvent
 
 from config import settings, am_client, executor
-from openai.vision import photo_to_emotions
+from openai_tool.vision_tool import photo_to_emotions
 
 router = Router()
 logger = logging.getLogger('photo_router')

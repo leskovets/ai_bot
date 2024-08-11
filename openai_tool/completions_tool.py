@@ -4,7 +4,7 @@ import os
 from openai import AsyncOpenAI
 
 from config import settings
-from openai.openai_tools import completions_tool
+from openai_tool.openai_tools import completions_tool
 
 client = AsyncOpenAI(api_key=settings.API_TOKEN_OPENAI)
 
