@@ -20,7 +20,7 @@ async def photo_handler(message: Message):
     path = 'test.jpg'
     await message.bot.download(photo_id, destination=path)
     logger.debug('photo download to server')
-    emotion = photo_to_emotions(path)
+    emotion = await photo_to_emotions(path)
     logger.debug(f'emotion is received: {emotion}')
     await message.reply(emotion)
     os.remove(path)
