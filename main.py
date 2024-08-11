@@ -18,7 +18,7 @@ async def main() -> None:
 
     storage = RedisStorage.from_url(settings.REDIS_URL)
 
-    bot = Bot(settings.API_TOKEN_telegram)
+    bot = Bot(settings.API_TOKEN_TELEGRAM)
     await bot.set_my_commands([
         BotCommand(command='start', description='старт'),
         BotCommand(command='new_tread', description='сбросить историю сообщений'),

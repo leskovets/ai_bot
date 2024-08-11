@@ -6,20 +6,20 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    DB_HOST: str
-    DB_PORT: int
-    DB_USER: str
-    DB_PASS: str
-    DB_NAME: str
+    PGHOST: str
+    PGPORT: int
+    PGUSER: str
+    PGPASSWORD: str
+    PGDATABASE: str
     API_TOKEN_OPENAI: str
-    API_TOKEN_telegram: str
+    API_TOKEN_TELEGRAM: str
     AMPLITUDE_API_KEY: str
     DB_ECHO: bool = False
     REDIS_URL: str
 
     @property
     def postgres_url(self):
-        return f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASS}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
+        return f"postgresql+asyncpg://{self.PGUSER}:{self.PGPASSWORD}@{self.PGHOST}:{self.PGPORT}/{self.PGDATABASE}"
 
     model_config = SettingsConfigDict(env_file=".env")
 

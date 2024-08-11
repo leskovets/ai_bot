@@ -1,7 +1,6 @@
 import json
 
 from openai_tool.completions_tool import validate_key_value
-from openai_tool.assistant_tools import assistant_tools
 from postgres_db.db_handler import update_key_value_by_chat_id
 from config import client
 
@@ -50,7 +49,9 @@ async def get_answer_from_assistant(question: str, chat_id: int, tread_id: str, 
             print("No tool outputs to submit.")
 
     response = await client.beta.threads.messages.list(thread_id=tread_id)
+
     print(response.data[0].content[0].text.annotations)
+
     response = response.data[0].content[0].text.value
 
     return response
