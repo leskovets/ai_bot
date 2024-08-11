@@ -1,23 +1,12 @@
 import json
 
 from openai_tool.completions_tool import validate_key_value
-from openai_tool.openai_tools import assistant_tools
+from openai_tool.assistant_tools import assistant_tools
 from postgres_db.db_handler import update_key_value_by_chat_id
 from config import client
 
 
-async def get_answer_from_assistant(question: str, chat_id: int, tread_id: str) -> str:
-
-    assistant = await client.beta.assistants.create(
-        name="assistant",
-        instructions="your main task in communicating with me is to find out my key values, "
-                     "then they will need to be saved using your save_value function. "
-                     "if the answer is True, then the data is saved, "
-                     "if False, then this value does not fit, you need to look further",
-        model="gpt-4o",
-        tools=assistant_tools
-
-    )
+async def get_answer_from_assistant(question: str, chat_id: int, tread_id: str, assistant_id: str) -> str:
 
     message = await client.beta.threads.messages.create(
         thread_id=tread_id,
@@ -27,7 +16,7 @@ async def get_answer_from_assistant(question: str, chat_id: int, tread_id: str) 
 
     run = await client.beta.threads.runs.create_and_poll(
         thread_id=tread_id,
-        assistant_id=assistant.id,
+        assistant_id=assistant_id,
     )
 
     if run.status == 'requires_action':
@@ -61,6 +50,7 @@ async def get_answer_from_assistant(question: str, chat_id: int, tread_id: str) 
             print("No tool outputs to submit.")
 
     response = await client.beta.threads.messages.list(thread_id=tread_id)
+    print(response.data[0].content[0].text.annotations)
     response = response.data[0].content[0].text.value
 
     return response

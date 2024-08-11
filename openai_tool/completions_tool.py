@@ -1,7 +1,7 @@
 import json
 
 from config import client
-from openai_tool.openai_tools import completions_tool
+from openai_tool.assistant_tools import completions_tool
 
 
 async def validate_key_value(key_value: str) -> str:

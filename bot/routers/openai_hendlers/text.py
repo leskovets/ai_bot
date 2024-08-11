@@ -14,8 +14,9 @@ logger = logging.getLogger('text_router')
 async def text_message_handler(message: Message, state: FSMContext):
 
     tread_id = (await state.get_data())['tread_id']
+    assistant_id = (await state.get_data())['assistant_id']
 
-    answer = await get_answer_from_assistant(message.text, message.chat.id, tread_id)
+    answer = await get_answer_from_assistant(message.text, message.chat.id, tread_id, assistant_id)
     logger.debug(f"response from the assistant: {answer}")
 
     await message.reply(text=answer)
