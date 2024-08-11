@@ -7,7 +7,7 @@ from aiogram.types import Message, FSInputFile
 from amplitude import BaseEvent
 
 from config import executor, am_client
-from openai_tool.TTS_tool import text_in_voice
+from openai_tool.tts_tool import text_in_voice
 from openai_tool.assistant_tool import get_answer_from_assistant
 from openai_tool.whisper_tool import voice_to_text
 

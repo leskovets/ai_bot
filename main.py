@@ -11,8 +11,6 @@ from bot.routers import router as main_router
 
 async def main() -> None:
 
-    amplitude_client = Amplitude(settings.AMPLITUDE_API_KEY)
-
     logging.basicConfig(level=logging.INFO)
 
     logger = logging.getLogger('main')
