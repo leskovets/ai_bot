@@ -5,3 +5,4 @@ openai==1.39.0
 pydantic-settings==2.4.0
 SQLAlchemy==2.0.20
 redis==5.0.8
+asyncpg==0.29.0
