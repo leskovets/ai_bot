@@ -2,7 +2,6 @@ FROM python:3.12.1
 
 RUN apt -y update
 RUN apt -y upgrade
-RUN apt install -y ffmpeg
 
 COPY requirements.txt ./app/
 

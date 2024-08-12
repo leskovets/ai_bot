@@ -17,6 +17,7 @@ class Settings(BaseSettings):
     DB_ECHO: bool = False
     REDIS_URL: str
 
+
     @property
     def postgres_url(self):
         return f"postgresql+asyncpg://{self.PGUSER}:{self.PGPASSWORD}@{self.PGHOST}:{self.PGPORT}/{self.PGDATABASE}"

@@ -13,7 +13,7 @@ router = Router()
 async def add_file(message: Message,  state: FSMContext) -> None:
     vector_store = await client.beta.vector_stores.create(name="Anxiety")
 
-    file_paths = ["openai_tool/files/anxiety.docx", ]
+    file_paths = ["openai_tool/files/anxiety.docx", "openai_tool/files/test_file.txt"]
     file_streams = [open(path, "rb") for path in file_paths]
 
     file_batch = await client.beta.vector_stores.file_batches.upload_and_poll(

@@ -50,8 +50,6 @@ async def get_answer_from_assistant(question: str, chat_id: int, tread_id: str, 
 
     response = await client.beta.threads.messages.list(thread_id=tread_id)
 
-    print(response.data[0].content[0].text.annotations)
-
     response = response.data[0].content[0].text.value
 
     return response
